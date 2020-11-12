@@ -2,7 +2,10 @@ const app = Vue.createApp({
     data() {
         return {
             product: 'Socks',
-            description: 'auskgdb',
+            image: './assets/images/socks_blue.jpg',
+            // solution
+            url: 'https://www.vuemastery.com/'
+            // solution
         }
     }
 })
