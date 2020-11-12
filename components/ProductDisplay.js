@@ -13,44 +13,47 @@ app.component('product-display', {
           <img v-bind:src="image">
         </div>
         <div class="product-info">
-          <h1>{{ title }}</h1>
+        <h1>{{ title }}</h1>
   
-          <p v-if="inStock">In Stock</p>
-          <p v-else>Out of Stock</p>
+        <p v-if="inStock">In Stock</p>
+        <p v-else>Out of Stock</p>
   
-          <p>Shipping: {{ shipping }}</p>
-          <ul>
+        <p>Shipping: {{ shipping }}</p>
+        <ul>
             <li v-for="detail in details">{{ detail }}</li>
-          </ul>
+        </ul>
   
-          <div 
+        <div 
             v-for="(variant, index) in variants" 
             :key="variant.id" 
             @mouseover="updateVariant(index)" 
             class="color-circle" 
             :style="{ backgroundColor: variant.color }">
-          </div>
+        </div>
           
-          <button 
+        <button 
             class="button" 
             :class="{ disabledButton: !inStock }" 
             :disabled="!inStock" 
             v-on:click="addToCart">
             Add to Cart
-          </button>
+        </button>
   
-          <!-- solution -->
-          <button 
+          
+        <button 
           class="button" 
           :class="{ disabledButton: !inStock }" 
           :disabled="!inStock" 
           @click="removeFromCart">
           Remove Item
         </button>
-        <!-- solution -->
+        
   
+
+            </div>
         </div>
-      </div>
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
     </div>`,
     data() {
       return {
@@ -61,7 +64,8 @@ app.component('product-display', {
           variants: [
             { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
             { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 },
-          ]
+          ],
+          reviews: []
       }
     },
     methods: {
